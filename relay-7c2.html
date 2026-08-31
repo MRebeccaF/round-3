@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070916" />
+    <meta name="description" content="Null Station level two: cross-platform terminal forensics." />
+    <title>Null Station — Level 2: Ghost Logs</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="game.js"></script>
+  </head>
+  <body data-level="2" data-next="packet-3f9.html">
+    <main class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Null Station home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <strong>Null Station</strong>
+            <span>Web enumeration training run</span>
+          </span>
+        </a>
+        <div class="top-actions">
+          <span class="status-pill"><i class="status-dot"></i> Relay sector discovered</span>
+          <button class="ghost-button" type="button" data-reset-mission>Reset mission</button>
+        </div>
+      </header>
+
+      <nav class="mission-progress" aria-label="Mission progress">
+        <div class="progress-step">
+          <span class="step-number">01</span>
+          <span class="step-copy"><strong>Stack Deck</strong><span>DSA</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">02</span>
+          <span class="step-copy"><strong>Ghost Logs</strong><span>Terminal</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">03</span>
+          <span class="step-copy"><strong>Packet Lab</strong><span>JavaScript</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">04</span>
+          <span class="step-copy"><strong>Moon Lock</strong><span>Logic</span></span>
+        </div>
+      </nav>
+
+      <section class="page-grid">
+        <aside class="panel story-panel">
+          <p class="eyebrow">Mission 02 / Relay tunnel</p>
+          <h1>The <span>Ghost Logs</span></h1>
+          <p class="story-lede">
+            Deck A is moving again, but its map points to a relay that officially does not exist.
+            Thousands of noisy logs conceal the path used by an unknown maintenance bot.
+          </p>
+          <ol class="story-log">
+            <li><time>02:08</time><span>Fragment 01 exposes a sealed diagnostics tunnel.</span></li>
+            <li><time>02:11</time><span>Relay logs show inconsistent capitalization and nested archives.</span></li>
+            <li><time>NOW</time><span>Extract a clean evidence file before the logs rotate.</span></li>
+          </ol>
+          <div class="fragment-card">
+            <span>Core integrity</span>
+            <strong data-fragment-status>1 / 4 fragments recovered</strong>
+          </div>
+        </aside>
+
+        <section class="panel challenge-panel">
+          <header class="challenge-head">
+            <div>
+              <p class="eyebrow">Terminal challenge</p>
+              <h2>Forensic One-Liner</h2>
+            </div>
+            <span class="level-chip">Intermediate · CLI</span>
+          </header>
+
+          <div class="problem-box">
+            <p>
+              You are inside the <code>mission/logs</code> directory. Write one pipeline that recursively
+              finds every <code>.log</code> file containing <code>ACCESS DENIED</code>, ignoring letter case.
+              Sort the matching <strong>file paths</strong> and write them to <code>../evidence.txt</code>.
+            </p>
+            <ul class="requirements">
+              <li>Recursive</li>
+              <li>Case-insensitive</li>
+              <li>*.log only</li>
+              <li>Sorted paths</li>
+            </ul>
+            <div class="example-row">
+              <div class="example-card">mission/logs/<br />├─ deck-a/door.log<br />└─ old/relay.LOG</div>
+              <div class="example-card">Output file:<br />mission/evidence.txt<br />one path per line</div>
+            </div>
+          </div>
+
+          <div class="workbench">
+            <div class="workbench-bar">
+              <label class="field-label" for="terminalMode">
+                Terminal
+                <select id="terminalMode">
+                  <option value="linux">Linux / Bash</option>
+                  <option value="windows">Windows / PowerShell</option>
+                </select>
+              </label>
+              <span class="file-tab">relay-shell / interactive</span>
+            </div>
+
+            <div class="terminal-shell">
+              <div class="terminal-top">
+                <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>FORENSIC RELAY · SESSION 7C2</span>
+              </div>
+              <div class="terminal-prompt" id="terminalPrompt">operator@null-station:~/mission/logs $</div>
+              <textarea
+                class="terminal-input"
+                id="terminalInput"
+                aria-label="Terminal command editor"
+                spellcheck="false"
+                autocomplete="off"
+              ></textarea>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-button" id="runButton" type="button">Execute pipeline</button>
+              <button class="secondary-button" id="resetCodeButton" type="button">Clear terminal</button>
+              <span class="keyboard-hint">Ctrl / Cmd + Enter to run</span>
+            </div>
+
+            <div class="judge-panel" id="judgeOutput" role="status" aria-live="polite"></div>
+
+            <div class="unlock-card" id="unlockCard">
+              <div class="unlock-copy">
+                <strong>Navigation fragment 02 recovered</strong>
+                <span>The evidence file contains a hidden packet-observatory route.</span>
+              </div>
+              <a class="next-link" id="nextLink" href="#">Open packet route →</a>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel companion-panel">
+          <div>
+            <div class="drone-stage" aria-hidden="true">
+              <span class="drone-orbit"></span>
+              <div class="drone">
+                <i class="drone-wing left"></i><i class="drone-wing right"></i>
+                <i class="drone-eye left"></i><i class="drone-eye right"></i><i class="drone-mouth"></i>
+              </div>
+            </div>
+            <p class="companion-label">BYTE / Flight AI</p>
+          </div>
+          <div class="speech-bubble">
+            “One pipeline, four jobs: discover, inspect, order, save. Operators who chain small tools are
+            basically station wizards.”
+          </div>
+          <div>
+            <ul class="intel-list">
+              <li><span>Difficulty</span><strong>Intermediate</strong></li>
+              <li><span>Concept</span><strong>Pipes + filters</strong></li>
+              <li><span>Est. time</span><strong>10–15 min</strong></li>
+            </ul>
+            <details class="hint-box">
+              <summary>Request one hint</summary>
+              <p>On Linux, combine <strong>grep</strong> with <strong>sort</strong>. In PowerShell, pair <strong>Get-ChildItem</strong> with <strong>Select-String</strong>.</p>
+            </details>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        <span>Null Station training simulation</span>
+        <span>Sector route: relay / 7c2</span>
+      </footer>
+    </main>
+
+    <div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-label="Access denied">
+      <div class="gate-card">
+        <div class="gate-lock">LOCK</div>
+        <h2>Relay route not discovered</h2>
+        <p>Complete the Stack Deck challenge first. Its recovered fragment reveals the only valid route into this sector.</p>
+        <a class="next-link" href="index.html">Return to Level 1</a>
+      </div>
+    </div>
+  </body>
+</html>

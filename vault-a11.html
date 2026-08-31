@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070916" />
+    <meta name="description" content="Null Station level four: the five-moon logic lock." />
+    <title>Null Station — Level 4: Moon Lock</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="game.js"></script>
+  </head>
+  <body data-level="4">
+    <main class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Null Station home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <strong>Null Station</strong>
+            <span>Web enumeration training run</span>
+          </span>
+        </a>
+        <div class="top-actions">
+          <span class="status-pill"><i class="status-dot"></i> Final vault in range</span>
+          <button class="ghost-button" type="button" data-reset-mission>Reset mission</button>
+        </div>
+      </header>
+
+      <nav class="mission-progress" aria-label="Mission progress">
+        <div class="progress-step">
+          <span class="step-number">01</span>
+          <span class="step-copy"><strong>Stack Deck</strong><span>DSA</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">02</span>
+          <span class="step-copy"><strong>Ghost Logs</strong><span>Terminal</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">03</span>
+          <span class="step-copy"><strong>Packet Lab</strong><span>JavaScript</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">04</span>
+          <span class="step-copy"><strong>Moon Lock</strong><span>Logic</span></span>
+        </div>
+      </nav>
+
+      <section class="page-grid">
+        <aside class="panel story-panel">
+          <p class="eyebrow">Mission 04 / Emergency vault</p>
+          <h1>The <span>Five-Moon Lock</span></h1>
+          <p class="story-lede">
+            The broadcast was BYTE's own forgotten distress call. Its final navigation fragment is sealed
+            behind an old five-moon lock that accepts one unique sequence.
+          </p>
+          <ol class="story-log">
+            <li><time>05:19</time><span>Packet reconstruction reveals vault address A11.</span></li>
+            <li><time>05:22</time><span>Five prior lock attempts survive in the emergency recorder.</span></li>
+            <li><time>NOW</time><span>Infer the only sequence consistent with every recorded clue.</span></li>
+          </ol>
+          <div class="fragment-card">
+            <span>Core integrity</span>
+            <strong data-fragment-status>3 / 4 fragments recovered</strong>
+          </div>
+        </aside>
+
+        <section class="panel challenge-panel">
+          <header class="challenge-head">
+            <div>
+              <p class="eyebrow">Logic challenge</p>
+              <h2>Crack the Five-Moon Sequence</h2>
+            </div>
+            <span class="level-chip">Intermediate · Unique solution</span>
+          </header>
+
+          <div class="problem-box">
+            <p>
+              The access sequence contains <strong>five different digits</strong>, each chosen from
+              <code>1–7</code>. For every recorded attempt, “exact” means a correct digit in the correct
+              position; “misplaced” means a correct digit in the wrong position. All uncounted digits are absent.
+            </p>
+            <ul class="requirements">
+              <li>Five digits</li>
+              <li>Use 1–7</li>
+              <li>No repeats</li>
+              <li>All clues apply</li>
+            </ul>
+
+            <div class="logic-board" aria-label="Five logic clues">
+              <div class="logic-rule"><span class="logic-digits">12345</span><p><strong>1 exact</strong> and 3 misplaced</p></div>
+              <div class="logic-rule"><span class="logic-digits">56127</span><p><strong>1 exact</strong> and 3 misplaced</p></div>
+              <div class="logic-rule"><span class="logic-digits">27514</span><p><strong>2 exact</strong> and 3 misplaced</p></div>
+              <div class="logic-rule"><span class="logic-digits">43672</span><p><strong>0 exact</strong> and 3 misplaced</p></div>
+              <div class="logic-rule"><span class="logic-digits">72451</span><p><strong>1 exact</strong> and 4 misplaced</p></div>
+            </div>
+          </div>
+
+          <div class="workbench">
+            <div class="workbench-bar">
+              <span class="field-label">Vault input</span>
+              <span class="file-tab">moon-lock / attempt final</span>
+            </div>
+
+            <div class="logic-entry">
+              <input
+                class="logic-input"
+                id="logicInput"
+                type="text"
+                inputmode="numeric"
+                maxlength="5"
+                aria-label="Five digit vault sequence"
+                placeholder="-----"
+                autocomplete="off"
+              />
+              <button class="primary-button" id="runButton" type="button">Test sequence</button>
+            </div>
+
+            <div class="judge-panel" id="judgeOutput" role="status" aria-live="polite"></div>
+
+            <div class="final-success" id="finalSuccess">
+              <h3>Congratulations, station navigator!</h3>
+              <p>
+                All four fragments are restored. Null Station has corrected its orbit and BYTE has issued
+                your unique 10-digit completion code:
+              </p>
+              <output class="final-code" id="finalCode" aria-label="Ten digit completion code"></output>
+              <div class="action-row">
+                <button class="secondary-button" id="copyCodeButton" type="button">Copy code</button>
+                <button class="secondary-button" type="button" data-reset-mission>Play again</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel companion-panel">
+          <div>
+            <div class="drone-stage" aria-hidden="true">
+              <span class="drone-orbit"></span>
+              <div class="drone">
+                <i class="drone-wing left"></i><i class="drone-wing right"></i>
+                <i class="drone-eye left"></i><i class="drone-eye right"></i><i class="drone-mouth"></i>
+              </div>
+            </div>
+            <p class="companion-label">BYTE / Flight AI</p>
+          </div>
+          <div class="speech-bubble">
+            “Don't chase one clue at a time. Use the attempts with five total matches to learn the digit set,
+            then use the zero-exact clue to eliminate positions.”
+          </div>
+          <div>
+            <ul class="intel-list">
+              <li><span>Difficulty</span><strong>Intermediate+</strong></li>
+              <li><span>Concept</span><strong>Constraint solving</strong></li>
+              <li><span>Solutions</span><strong>Exactly one</strong></li>
+            </ul>
+            <details class="hint-box">
+              <summary>Request one hint</summary>
+              <p>The third and fifth attempts each contain all five correct digits. Compare their positions before using the fourth attempt.</p>
+            </details>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        <span>Null Station training simulation</span>
+        <span>Emergency vault: a11 / final</span>
+      </footer>
+    </main>
+
+    <div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-label="Access denied">
+      <div class="gate-card">
+        <div class="gate-lock">LOCK</div>
+        <h2>Vault coordinates missing</h2>
+        <p>Complete the Packet Lab first. The reconstructed broadcast contains the emergency vault address.</p>
+        <a class="next-link" href="index.html">Restart the mission</a>
+      </div>
+    </div>
+  </body>
+</html>

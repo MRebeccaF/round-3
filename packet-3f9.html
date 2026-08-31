@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070916" />
+    <meta name="description" content="Null Station level three: JavaScript packet reconstruction." />
+    <title>Null Station — Level 3: Packet Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="game.js"></script>
+  </head>
+  <body data-level="3" data-next="vault-a11.html">
+    <main class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="Null Station home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <strong>Null Station</strong>
+            <span>Web enumeration training run</span>
+          </span>
+        </a>
+        <div class="top-actions">
+          <span class="status-pill"><i class="status-dot"></i> Packets entering buffer</span>
+          <button class="ghost-button" type="button" data-reset-mission>Reset mission</button>
+        </div>
+      </header>
+
+      <nav class="mission-progress" aria-label="Mission progress">
+        <div class="progress-step">
+          <span class="step-number">01</span>
+          <span class="step-copy"><strong>Stack Deck</strong><span>DSA</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">02</span>
+          <span class="step-copy"><strong>Ghost Logs</strong><span>Terminal</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">03</span>
+          <span class="step-copy"><strong>Packet Lab</strong><span>JavaScript</span></span>
+        </div>
+        <div class="progress-step">
+          <span class="step-number">04</span>
+          <span class="step-copy"><strong>Moon Lock</strong><span>Logic</span></span>
+        </div>
+      </nav>
+
+      <section class="page-grid">
+        <aside class="panel story-panel">
+          <p class="eyebrow">Mission 03 / Observatory</p>
+          <h1>The <span>Packet Lab</span></h1>
+          <p class="story-lede">
+            The ghost log leads to an abandoned observatory. Its receiver is alive—but the navigation
+            broadcast arrives out of order across several channels, mixed with corrupted decoys.
+          </p>
+          <ol class="story-log">
+            <li><time>03:42</time><span>Evidence identifies observatory route 3F9.</span></li>
+            <li><time>03:45</time><span>Receiver detects valid and corrupt packet signatures.</span></li>
+            <li><time>NOW</time><span>Reassemble every channel without altering the original buffer.</span></li>
+          </ol>
+          <div class="fragment-card">
+            <span>Core integrity</span>
+            <strong data-fragment-status>2 / 4 fragments recovered</strong>
+          </div>
+        </aside>
+
+        <section class="panel challenge-panel">
+          <header class="challenge-head">
+            <div>
+              <p class="eyebrow">JavaScript challenge</p>
+              <h2>Assemble the Broadcast</h2>
+            </div>
+            <span class="level-chip">Intermediate · Data transforms</span>
+          </header>
+
+          <div class="problem-box">
+            <p>
+              Implement <code>assemblePackets(packets)</code>. Ignore packets where <code>corrupt</code> is
+              true, group the rest by <code>channel</code>, sort each channel by numeric <code>seq</code>, and
+              join its payloads. Return an object with channel keys in alphabetical order. Do not mutate
+              the input array.
+            </p>
+            <ul class="requirements">
+              <li>Filter corrupt packets</li>
+              <li>Group by channel</li>
+              <li>Sort by seq</li>
+              <li>No input mutation</li>
+            </ul>
+            <div class="packet-flow" aria-label="Example packet order">
+              <span>A:2</span><span>B:1</span><span>A:1</span><span>X:0</span><span>B:2</span>
+            </div>
+            <div class="example-row">
+              <div class="example-card">alpha: “lo” @ 2<br />alpha: “Hel” @ 1<br />→ “Hello”</div>
+              <div class="example-card">corrupt: true<br />→ packet discarded<br />before grouping</div>
+            </div>
+          </div>
+
+          <div class="workbench">
+            <div class="workbench-bar">
+              <label class="field-label" for="runtimeSelect">
+                Runtime
+                <select id="runtimeSelect" disabled>
+                  <option>JavaScript / Web Worker</option>
+                </select>
+              </label>
+              <span class="file-tab" id="fileName">assemble-packets.js</span>
+            </div>
+
+            <div class="editor-shell">
+              <div class="editor-top">
+                <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>ISOLATED LOCAL WORKER · 1200 MS LIMIT</span>
+              </div>
+              <textarea
+                class="code-input"
+                id="codeInput"
+                aria-label="JavaScript solution editor"
+                spellcheck="false"
+                autocomplete="off"
+              ></textarea>
+            </div>
+
+            <div class="action-row">
+              <button class="primary-button" id="runButton" type="button">Run packet tests</button>
+              <button class="secondary-button" id="resetCodeButton" type="button">Reset starter</button>
+              <span class="keyboard-hint">Ctrl / Cmd + Enter to run</span>
+            </div>
+
+            <div class="judge-panel" id="judgeOutput" role="status" aria-live="polite"></div>
+
+            <div class="unlock-card" id="unlockCard">
+              <div class="unlock-copy">
+                <strong>Navigation fragment 03 recovered</strong>
+                <span>The completed broadcast names a moon-locked emergency vault.</span>
+              </div>
+              <a class="next-link" id="nextLink" href="#">Approach the vault →</a>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel companion-panel">
+          <div>
+            <div class="drone-stage" aria-hidden="true">
+              <span class="drone-orbit"></span>
+              <div class="drone">
+                <i class="drone-wing left"></i><i class="drone-wing right"></i>
+                <i class="drone-eye left"></i><i class="drone-eye right"></i><i class="drone-mouth"></i>
+              </div>
+            </div>
+            <p class="companion-label">BYTE / Flight AI</p>
+          </div>
+          <div class="speech-bubble">
+            “The packets are tiny puzzle pieces with labels. Throw away the radioactive ones, sort each
+            color, then read every row.”
+          </div>
+          <div>
+            <ul class="intel-list">
+              <li><span>Difficulty</span><strong>Intermediate</strong></li>
+              <li><span>Concept</span><strong>Grouping + sorting</strong></li>
+              <li><span>Est. time</span><strong>15–20 min</strong></li>
+            </ul>
+            <details class="hint-box">
+              <summary>Request one hint</summary>
+              <p>Build an object of channel arrays first. Then transform sorted channel names into <strong>[key, value]</strong> pairs for Object.fromEntries.</p>
+            </details>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        <span>Null Station training simulation</span>
+        <span>Observatory route: packet / 3f9</span>
+      </footer>
+    </main>
+
+    <div class="access-gate" id="accessGate" role="dialog" aria-modal="true" aria-label="Access denied">
+      <div class="gate-card">
+        <div class="gate-lock">LOCK</div>
+        <h2>Packet route not discovered</h2>
+        <p>Complete the Ghost Logs terminal challenge first. The evidence file contains the route to this observatory.</p>
+        <a class="next-link" href="index.html">Restart the mission</a>
+      </div>
+    </div>
+  </body>
+</html>
