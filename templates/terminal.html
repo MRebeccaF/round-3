@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="terminal">
+  <h1>ADROIT ARCHIVE TERMINAL v0.8</h1>
+  <p>Enter the 10-digit recovery code.</p>
+  <form method="post">
+    <label for="code">RECOVERY_CODE&gt;</label>
+    <input id="code" name="code" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required autofocus>
+    <button type="submit">RUN</button>
+  </form>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+</section>
+{% endblock %}

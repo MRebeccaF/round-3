@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- archive reminder: old club materials are still at /archives/ -->
+<section class="welcome">
+  <p class="blink">WELCOME TO THE OFFICIAL ADROIT WEBSITE</p>
+  <h1>AdroIT Computer Club</h1>
+  <p>We build webpages, trade game cheats, and sometimes remember to update this site.</p>
+  <div class="construction">UNDER CONSTRUCTION</div>
+  <p><a href="#" class="broken-link big-link">Download our secret project</a></p>
+  <p><a href="{{ url_for('human_check') }}">Click here to prove you are human</a></p>
+</section>
+{% endblock %}

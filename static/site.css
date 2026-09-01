@@ -1,0 +1,75 @@
+:root {
+  --ink: #001b4f;
+  --link: #0000cc;
+  --paper: #fffbe7;
+  --rule: #5f759f;
+  --hot: #d00055;
+  --lime: #00a64f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background-color: #c8d7ef;
+  background-image: radial-gradient(#f4f8ff 1px, transparent 1px);
+  background-size: 6px 6px;
+  font-family: "Comic Sans MS", "Trebuchet MS", cursive;
+  font-size: 16px;
+}
+
+.page-shell {
+  width: min(760px, calc(100% - 24px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 12px 18px 30px;
+  background: var(--paper);
+  border-left: 3px ridge #fff;
+  border-right: 3px ridge #fff;
+}
+
+.site-header { text-align: center; border-bottom: 3px double var(--rule); }
+.site-header p { margin: 3px; }
+.logo { color: var(--hot); font: bold 44px Impact, fantasy; text-decoration: none; letter-spacing: 0; text-shadow: 2px 2px #ffd900; }
+.logo span { color: var(--lime); }
+.tagline, .fine-print { font-size: 12px; }
+nav { padding: 10px 0; text-align: center; font-family: Arial, sans-serif; font-size: 14px; }
+a { color: var(--link); }
+a:visited { color: #551a8b; }
+main { min-height: 440px; padding: 10px 5px; }
+h1 { color: #800040; font-family: Georgia, serif; font-size: 28px; }
+h2 { font-size: 19px; }
+.welcome { text-align: center; padding-top: 50px; }
+.blink { color: var(--hot); font-weight: bold; animation: flash 0.9s steps(2, start) infinite; }
+.construction { display: inline-block; padding: 6px; color: #111; background: repeating-linear-gradient(45deg, #ffd900 0 12px, #111 12px 24px); font: bold 16px Arial, sans-serif; }
+.big-link { font-size: 20px; }
+.link-list li { padding: 7px 0; }
+.counter { width: fit-content; margin: 25px auto; padding: 12px; color: #d91e18; background: #111; border: 6px ridge #bbb; font: 32px "Courier New", monospace; letter-spacing: 4px; }
+.news-post, .guestbook { padding: 8px 12px; margin: 14px 0; border: 1px dashed var(--rule); background: #eff8ff; }
+table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+th, td { padding: 8px; border: 1px solid var(--rule); text-align: left; }
+th { color: white; background: #315b94; }
+.terminal { padding: 18px; color: #76ff64; background: #09150b; border: 8px ridge #7f8f7f; font-family: "Courier New", monospace; }
+.terminal h1 { color: #76ff64; font-family: "Courier New", monospace; font-size: 20px; }
+.terminal input { width: min(260px, 100%); padding: 6px; border: 1px solid #76ff64; color: #76ff64; background: #09150b; font: 18px "Courier New", monospace; }
+button { padding: 6px 12px; border: 2px outset #ddd; background: #e2e2e2; color: #111; cursor: pointer; }
+.error { color: #ff9b9b; }
+.flag { color: #fff869; font-size: 20px; font-weight: bold; }
+.human-check { text-align: center; }
+.icon-grid { display: grid; grid-template-columns: repeat(2, minmax(110px, 160px)); justify-content: center; gap: 14px; margin: 30px 0; }
+.icon-button { min-height: 86px; font: 16px "Comic Sans MS", cursive; }
+.ad-popup { position: fixed; z-index: 2; right: 18px; bottom: 18px; width: min(280px, calc(100% - 36px)); padding: 22px 14px 14px; color: #111; background: #fff; border: 4px outset #d4d4d4; box-shadow: 6px 6px 0 #456; font-family: Arial, sans-serif; }
+.ad-popup strong { color: #d00055; }
+.ad-popup a { display: block; margin-top: 9px; font-weight: bold; }
+.popup-close { position: absolute; top: 3px; right: 3px; min-width: 25px; padding: 2px 6px; }
+footer { padding-top: 12px; border-top: 3px double var(--rule); text-align: center; font-size: 12px; }
+
+@keyframes flash { 50% { visibility: hidden; } }
+
+@media (max-width: 520px) {
+  .page-shell { width: 100%; padding: 10px 14px 30px; }
+  .logo { font-size: 38px; }
+  main { min-height: 390px; }
+  .terminal form { display: grid; gap: 8px; }
+}

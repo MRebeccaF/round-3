@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="human-check">
+  <h1>Human Verification Center</h1>
+  <p>Click the floppy disk to prove you are definitely not a robot.</p>
+  <div class="icon-grid" aria-label="Verification icon choices">
+    <button type="button" class="icon-button" data-decoy>Phone</button>
+    <button type="button" class="icon-button" data-decoy>Mouse</button>
+    <button type="button" class="icon-button" data-rickroll>Floppy disk</button>
+    <button type="button" class="icon-button" data-decoy>Monitor</button>
+  </div>
+  <p id="human-message" aria-live="polite"></p>
+</section>
+{% endblock %}
