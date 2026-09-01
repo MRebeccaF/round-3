@@ -140,7 +140,7 @@
     const output = document.getElementById('simOutput');
     decode.addEventListener('click', () => {
       output.hidden = false;
-      output.textContent = `RECOVERED TRANSIT RELAY / FRAGMENT 9X\n\nrecord-a: 3438343235323762373236663735373436353566\nrecord-b: 3633373337323732363536633631373436393666\nrecord-c: 3665356637373639366537333764\n\nchain note: the first pass is readable only after the second pass.\nformat note: no separators were preserved.`;
+      output.textContent = `RECOVERED TRANSIT RELAY / FRAGMENT 9X\n\nrecord-a: 3438343235323762373236663735373436353566\nrecord-b: 3633366637323732363536633631373436393666\nrecord-c: 3665356637373639366537333764\n\nchain note: the first pass is readable only after the second pass.\nformat note: no separators were preserved.`;
       decode.textContent = 'Artifact recovered'; decode.disabled = true;
     });
     document.getElementById('submitAnswers').addEventListener('click', () => {
