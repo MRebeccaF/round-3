@@ -2,7 +2,7 @@
 
 A local, intermediate web-enumeration game set on an abandoned early-2000s school computer club website. It is entirely simulated: no real scanning, CAPTCHA service, login attack, or data collection occurs.
 
-## Run locally
+## Run locally here
 
 Prerequisite: Python 3.8 or later must be installed and available as `python`.
 
