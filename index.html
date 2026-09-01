@@ -4,152 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#070916" />
-    <meta name="description" content="Null Station: a four-level web enumeration coding adventure." />
-    <title>Null Station — Level 1: Stack Deck</title>
+    <meta name="description" content="Signal Harbor is an original browser-based security training simulation." />
+    <title>Signal Harbor | Gate 8080</title>
     <link rel="stylesheet" href="styles.css" />
     <script defer src="game.js"></script>
   </head>
   <body data-level="1" data-next="relay-7c2.html">
     <main class="site-shell">
       <header class="topbar">
-        <a class="brand" href="index.html" aria-label="Null Station home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span class="brand-copy">
-            <strong>Null Station</strong>
-            <span>Web enumeration training run</span>
-          </span>
-        </a>
-        <div class="top-actions">
-          <span class="status-pill"><i class="status-dot"></i> Station link unstable</span>
-          <button class="ghost-button" type="button" data-reset-mission>Reset mission</button>
-        </div>
+        <a class="brand" href="index.html" aria-label="Signal Harbor home"><span class="brand-mark" aria-hidden="true"></span><span class="brand-copy"><strong>Signal Harbor</strong><span>unverified mirror // training data</span></span></a>
+        <div class="top-actions"><span class="status-pill"><i class="status-dot"></i> telemetry partially corrupted</span><button class="ghost-button" type="button" data-reset-mission>Reset run</button></div>
       </header>
-
       <section class="page-grid">
         <aside class="panel story-panel">
-          <p class="eyebrow">Mission 01 / Debris belt</p>
-          <h1>The <span>Stack Deck</span></h1>
-          <p class="story-lede">
-            A solar burst scattered the station navigation core into four encrypted fragments.
-            BYTE, the junior flight AI, needs your help before Null Station drifts into the debris belt.
-          </p>
-          <ol class="story-log">
-            <li><time>00:00</time><span>Navigation core reports four missing fragments.</span></li>
-            <li><time>00:17</time><span>Drone traffic stalls behind an unsorted collision queue.</span></li>
-            <li><time>NOW</time><span>Find every drone's next safe altitude to reopen Deck A.</span></li>
-          </ol>
-          <div class="fragment-card">
-            <span>Core integrity</span>
-            <strong data-fragment-status>0 / 4 fragments recovered</strong>
-          </div>
+          <p class="eyebrow">Room 01 / Harbor gate</p><h1>Gate <span>8080</span></h1>
+          <p class="story-lede">A new commuter portal has appeared on the Harbor Authority's network map. Your task is to inventory the published services before the morning rush.</p>
+          <ol class="story-log"><li><time>07:40</time><span>Dock-gateway is reachable in the isolated training network.</span></li><li><time>07:43</time><span>Operations only documented the public website.</span></li><li><time>NOW</time><span>Map what the simulated host is actually offering.</span></li></ol>
+          <div class="fragment-card"><span>Progress</span><strong data-progress>0 / 3 flags verified</strong></div>
         </aside>
-
         <section class="panel challenge-panel">
-          <header class="challenge-head">
-            <div>
-              <p class="eyebrow">Coding challenge</p>
-              <h2>Next Greater Signal</h2>
-            </div>
-            <span class="level-chip">Intermediate · O(n)</span>
-          </header>
-
-          <div class="problem-box">
-            <p>
-              Given an array of drone altitudes, return the <strong>next greater value to the right</strong>
-              for each item. If none exists, return <code>-1</code>. A quadratic scan overloads the deck;
-              use a monotonic stack and finish in linear time.
-            </p>
-            <ul class="requirements">
-              <li>Time O(n)</li>
-              <li>Space O(n)</li>
-              <li>Return values, not indices</li>
-              <li>Empty input is valid</li>
-            </ul>
-            <div class="example-row">
-              <div class="example-card">[4, 5, 2, 25]<br />→ [5, 25, 25, -1]</div>
-              <div class="example-card">[13, 7, 6, 12]<br />→ [-1, 12, 12, -1]</div>
-            </div>
-          </div>
-
-          <div class="workbench">
-            <div class="workbench-bar">
-              <label class="field-label" for="languageSelect">
-                Language
-                <select id="languageSelect">
-                  <option value="python">Python</option>
-                  <option value="c">C</option>
-                  <option value="java">Java</option>
-                  <option value="cpp">C++</option>
-                </select>
-              </label>
-              <span class="file-tab" id="fileName">next_greater.py</span>
-            </div>
-
-            <div class="editor-shell">
-              <div class="editor-top">
-                <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span>LOCAL PATTERN JUDGE · UTF-8</span>
-              </div>
-              <textarea
-                class="code-input"
-                id="codeInput"
-                aria-label="DSA solution editor"
-                spellcheck="false"
-                autocomplete="off"
-              ></textarea>
-            </div>
-
-            <div class="action-row">
-              <button class="primary-button" id="runButton" type="button">Run hidden checks</button>
-              <button class="secondary-button" id="resetCodeButton" type="button">Reset starter</button>
-              <span class="keyboard-hint">Ctrl / Cmd + Enter to run</span>
-            </div>
-
-            <div class="judge-panel" id="judgeOutput" role="status" aria-live="polite"></div>
-
-            <div class="unlock-card" id="unlockCard">
-              <div class="unlock-copy">
-                <strong>Navigation fragment 01 recovered</strong>
-                <span>A hidden relay address has materialized in the station map.</span>
-              </div>
-              <a class="next-link" id="nextLink" href="#">Follow hidden link →</a>
-            </div>
-          </div>
+          <header class="challenge-head"><div><p class="eyebrow">Web reconnaissance</p><h2>Enumerate the gateway</h2></div><span class="level-chip">Very easy · 30 pts</span></header>
+          <div class="problem-box"><p>Use the built-in <strong>simulated scanner</strong> to review an approved training host. Nothing leaves this page and no real system is contacted.</p><div class="ctf-meta"><span>Category <b>Web</b></span><span>Target <b>10.88.19.27</b></span><span>Est. time <b>5 min</b></span></div></div>
+          <div class="workbench"><div class="workbench-bar"><span class="field-label">Recon console</span><span class="file-tab">dock-gateway.training</span></div><pre class="sim-output" id="simOutput" hidden></pre><div class="action-row"><button class="primary-button" id="runButton" type="button">Run simulated scan</button><span class="keyboard-hint">No network request is made</span></div></div>
+          <div class="answer-card"><h3>Answer the briefing</h3><div class="answer-grid"><label>How many TCP ports are open?<input id="answerPorts" inputmode="numeric" placeholder="enter response" /></label><label>What web-server version is reported?<input id="answerServer" placeholder="enter response" /></label><label>What service runs on the highest port?<input id="answerService" placeholder="enter response" /></label></div><button class="primary-button" id="submitAnswers" type="button">Verify answers</button></div>
+          <div class="judge-panel" id="judgeOutput" role="status" aria-live="polite"></div>
+          <div class="unlock-card" id="unlockCard"><div class="unlock-copy"><strong>Flag 01 verified</strong><span>A forgotten route was referenced by the gateway manifest.</span></div><a class="next-link" id="nextLink" href="#">Enter Room 02 →</a></div>
         </section>
-
-        <aside class="panel companion-panel">
-          <div>
-            <div class="drone-stage" aria-hidden="true">
-              <span class="drone-orbit"></span>
-              <div class="drone">
-                <i class="drone-wing left"></i><i class="drone-wing right"></i>
-                <i class="drone-eye left"></i><i class="drone-eye right"></i><i class="drone-mouth"></i>
-              </div>
-            </div>
-            <p class="companion-label">BYTE / Flight AI</p>
-          </div>
-          <div class="speech-bubble">
-            “Think of the stack as a waiting room. When a taller signal arrives, everyone shorter at the
-            top finally gets an answer.”
-          </div>
-          <div>
-            <ul class="intel-list">
-              <li><span>Difficulty</span><strong>Intermediate</strong></li>
-              <li><span>Concept</span><strong>Monotonic stack</strong></li>
-              <li><span>Est. time</span><strong>15–20 min</strong></li>
-            </ul>
-            <details class="hint-box">
-              <summary>Request one hint</summary>
-              <p>Store unresolved <strong>indices</strong>, not values. The current value answers every smaller index at the stack top.</p>
-            </details>
-          </div>
-        </aside>
+        <aside class="panel companion-panel"><div><div class="drone-stage" aria-hidden="true"><span class="drone-orbit"></span><div class="drone"><i class="drone-wing left"></i><i class="drone-wing right"></i><i class="drone-eye left"></i><i class="drone-eye right"></i><i class="drone-mouth"></i></div></div><p class="companion-label">HARBOR OPS / SIMULATION</p></div><div class="speech-bubble">“Inventory first. A service you do not know exists is a service you cannot protect.”</div><div><ul class="intel-list"><li><span>Difficulty</span><strong>Very easy</strong></li><li><span>Skill</span><strong>Service discovery</strong></li><li><span>Lab type</span><strong>Simulated</strong></li></ul><details class="hint-box"><summary>Request a hint</summary><p>Scan output lists a row for every discovered port. The highest numerical port is not necessarily the common web port.</p></details></div></aside>
       </section>
-
-      <footer class="site-footer">
-        <span>Null Station training simulation</span>
-        <span>Progress stays in this browser</span>
-      </footer>
+      <footer class="site-footer"><span>Signal Harbor training simulation</span><span>For authorized learning only</span></footer>
     </main>
   </body>
 </html>
