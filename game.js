@@ -225,16 +225,6 @@ vector<int> nextGreater(const vector<int>& nums) {
 
   function syncProgress() {
     const progress = readProgress();
-    document.querySelectorAll('.progress-step').forEach((step, index) => {
-      const stepLevel = index + 1;
-      step.classList.toggle('is-complete', progress >= stepLevel);
-      if (stepLevel === pageLevel) {
-        step.setAttribute('aria-current', 'step');
-      } else {
-        step.removeAttribute('aria-current');
-      }
-    });
-
     const fragment = document.querySelector('[data-fragment-status]');
     if (fragment) {
       const recovered = Math.min(progress, 4);

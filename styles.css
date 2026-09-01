@@ -211,99 +211,6 @@ a {
   transform: translateY(-1px);
 }
 
-.mission-progress {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  padding: 14px;
-  margin-bottom: 18px;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(10, 13, 29, 0.72);
-  box-shadow: 0 14px 40px rgba(0,0,0,.2);
-  backdrop-filter: blur(16px);
-}
-
-.mission-progress::before {
-  position: absolute;
-  top: 31px;
-  left: calc(12.5% + 12px);
-  right: calc(12.5% + 12px);
-  height: 1px;
-  content: "";
-  background: linear-gradient(90deg, rgba(87,230,255,.55), rgba(157,123,255,.35), rgba(255,255,255,.1));
-}
-
-.progress-step {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 38px 1fr;
-  align-items: center;
-  gap: 11px;
-  min-width: 0;
-  padding: 5px 9px;
-  border-radius: 12px;
-}
-
-.progress-step[aria-current="step"] {
-  background: rgba(87,230,255,.065);
-}
-
-.step-number {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 1px solid rgba(145,160,201,.3);
-  border-radius: 50%;
-  color: #76809b;
-  background: #0b0e20;
-  font-family: var(--mono);
-  font-size: .74rem;
-  box-shadow: 0 0 0 5px #0b0e20;
-}
-
-.progress-step.is-complete .step-number {
-  color: #10160d;
-  border-color: var(--lime);
-  background: var(--lime);
-  box-shadow: 0 0 0 5px #0b0e20, 0 0 22px rgba(185,255,102,.26);
-}
-
-.progress-step[aria-current="step"] .step-number {
-  color: #071318;
-  border-color: var(--cyan);
-  background: var(--cyan);
-  box-shadow: 0 0 0 5px #0b0e20, 0 0 22px rgba(87,230,255,.3);
-}
-
-.step-copy {
-  min-width: 0;
-}
-
-.step-copy strong,
-.step-copy span {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.step-copy strong {
-  font-size: .76rem;
-  letter-spacing: .03em;
-}
-
-.step-copy span {
-  margin-top: 3px;
-  color: #737f9c;
-  font-family: var(--mono);
-  font-size: .61rem;
-  text-transform: uppercase;
-}
-
 .page-grid {
   display: grid;
   grid-template-columns: minmax(250px, .76fr) minmax(500px, 1.55fr) minmax(230px, .7fr);
@@ -1332,13 +1239,6 @@ a {
   .site-shell { width: min(100% - 24px, 720px); padding-top: 12px; }
   .topbar { padding-bottom: 15px; }
   .status-pill { display: none; }
-  .mission-progress { gap: 4px; padding: 9px; }
-  .mission-progress::before { display: none; }
-  .progress-step { grid-template-columns: 1fr; gap: 5px; justify-items: center; padding: 5px 3px; }
-  .step-number { width: 30px; height: 30px; box-shadow: none !important; }
-  .step-copy { text-align: center; }
-  .step-copy span { display: none; }
-  .step-copy strong { font-size: .62rem; }
   .page-grid { grid-template-columns: 1fr; }
   .story-panel { min-height: auto; }
   .story-panel h1 { max-width: 12ch; }

@@ -1,0 +1,47 @@
+Level 1
+
+def next_greater(nums):
+    result = [-1] * len(nums)
+    stack = []
+
+    for i, value in enumerate(nums):
+        while stack and nums[stack[-1]] < value:
+            result[stack.pop()] = value
+        stack.append(i)
+
+    return result
+
+
+Level 2
+
+grep -ril --include="*.log" "ACCESS DENIED" . | sort > ../evidence.txt
+
+
+Level 3
+
+function assemblePackets(packets) {
+  const channels = {};
+
+  for (const packet of packets) {
+    if (packet.corrupt) continue;
+    if (!channels[packet.channel]) channels[packet.channel] = [];
+    channels[packet.channel].push(packet);
+  }
+
+  return Object.fromEntries(
+    Object.keys(channels)
+      .sort()
+      .map((channel) => [
+        channel,
+        channels[channel]
+          .sort((a, b) => a.seq - b.seq)
+          .map((packet) => packet.payload)
+          .join(''),
+      ]),
+  );
+}
+
+
+Level 4
+
+52714
