@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="terminal">
+  <h1>ADROIT ARCHIVE TERMINAL v2.0</h1>
+  <p>Enter the final 16-letter codebook key.</p>
+  <form method="post">
+    <label for="key">CODEBOOK_KEY&gt;</label>
+    <input id="key" name="key" maxlength="16" required autofocus>
+    <button type="submit">UNSEAL</button>
+  </form>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+</section>
+{% endblock %}

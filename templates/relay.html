@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}AdroIT Relay Console{% endblock %}
+{% block content %}
+<!-- Repeater records remain at:
+     /archives/relay/north
+     /archives/relay/east
+     /archives/relay/south
+     /archives/relay/west
+     /archives/relay/central
+     /archives/relay/library
+     /archives/relay/lab
+     /archives/relay/modem -->
+<section class="terminal">
+  <h1>RELAY RESTORATION CONSOLE</h1>
+  <p>Eight repeaters retained a one-digit output tile.</p>
+  <p>Each recorded when it <em>received</em> a packet and its transmission delay. Subtract the delay to find when the packet was sent. Order the tiles from earliest sent time to latest.</p>
+  <p>Append the sum of all eight recovered digits as a two-digit checksum.</p>
+  <p><a href="{{ url_for('relay_terminal') }}">Open relay terminal</a></p>
+</section>
+{% endblock %}

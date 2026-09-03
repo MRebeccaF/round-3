@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="terminal">
-  <h1>ADROIT ARCHIVE TERMINAL v0.8</h1>
-  <p>Enter the 10-digit recovery code. All four fragments must be recovered first.</p>
+  <h1>ADROIT RELAY TERMINAL v1.1</h1>
+  <p>Enter the 10-digit relay restoration code.</p>
   <form method="post">
-    <label for="code">RECOVERY_CODE&gt;</label>
+    <label for="code">RELAY_CODE&gt;</label>
     <input id="code" name="code" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required autofocus>
-    <button type="submit">RUN</button>
+    <button type="submit">RESTORE</button>
   </form>
   {% if error %}<p class="error">{{ error }}</p>{% endif %}
 </section>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ node.name }}{% endblock %}
+{% block content %}
+<h1>{{ node.name }}</h1>
+<p>Recovered from the secondary archive's network maintenance log.</p>
+<table>
+  <tr><th>Received time</th><th>Transmission delay</th><th>Output tile</th></tr>
+  <tr><td>{{ node.received }}</td><td>{{ node.delay }}</td><td>{{ node.tile }}</td></tr>
+</table>
+<p class="fine-print">Log clocks use 24-hour local time.</p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ shelf.name }}{% endblock %}
+{% block content %}
+<h1>{{ shelf.name }}</h1>
+<p>One faded microfilm index card survived.</p>
+<table>
+  <tr><th>Checked out</th><th>Coordinate pairs</th></tr>
+  <tr><td>{{ shelf.checked_out }}</td><td>{{ shelf.coordinates }}</td></tr>
+</table>
+<p class="fine-print">Coordinates are row first, then column.</p>
+{% endblock %}

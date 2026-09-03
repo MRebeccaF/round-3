@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block title %}AdroIT Archives{% endblock %}
 {% block content %}
-<!-- terminal address: /term-inal/ ; append the final zero after the archive fragments -->
+<!-- terminal address: /term-inal/
+     Recovery protocol: begin with the visitor counter. A valid next 3-digit tile
+     begins with the previous tile's final digit. Keep only its two new digits.
+     After every tile is linked, append the sum of the recovered digits modulo 10. -->
 <h1>AdroIT Archive Room</h1>
 <p>Old pages salvaged from Mr. Patel's floppy disks.</p>
 <ul class="link-list">
@@ -9,5 +12,5 @@
   <li><a href="#" class="broken-link">1999 club photos (missing)</a></li>
   <li><a href="{{ url_for('dead_end') }}">Old password list (totally real)</a></li>
 </ul>
-<p class="fine-print">Archive fragments are read in the order you find them.</p>
+<p class="fine-print">The counter begins a recovery chain. Archive fragments are not simply concatenated.</p>
 {% endblock %}
