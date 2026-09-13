@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ portal.title }}{% endblock %}
+{% block content %}
+{% if portal.is_real %}<script src="{{ url_for('static', filename='app.js') }}"></script>{% endif %}
+<section class="terminal">
+  <h1>{{ portal.title }}</h1>
+  {% if mirror_unlocked %}
+  <!-- recovered surface endpoint: /evidence/surface-9w -->
+  <p>MIRROR INDEX RECOVERED</p>
+  <p>The public copy was removed. The surviving surface record is still indexed.</p>
+  {% elif flag %}
+  <p>ACCESS GRANTED</p>
+  <p class="flag">{{ flag }}</p>
+  {% else %}
+  <p>Authorized staff only. This simulated CTF login is local to the training app.</p>
+  <form method="post">
+    <label for="username">USERNAME&gt;</label>
+    <input id="username" name="username" required autofocus>
+    <label for="password">PASSWORD&gt;</label>
+    <input id="password" name="password" type="password" required>
+    <button type="submit">SIGN IN</button>
+  </form>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  {% endif %}
+</section>
+{% endblock %}

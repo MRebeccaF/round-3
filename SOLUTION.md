@@ -54,11 +54,39 @@ Do not link this file from the application.
     | Modem | 28 March | `15 23` | `IL` |
 
 13. Reading the grid coordinates in that order produces `ADROITMOUSETRAIL`. Submit it
-    at `/term-inal/final` to receive `ADROIT{old_web_never_forgets}`. The final
-    terminal rejects submissions until every shelf card has been inspected.
+    at `/term-inal/final` to receive `ADROIT{old\_web\_never\_forgets}`. This is an
+    intentional, convincing decoy flag; the CyberLeek evidence endpoint is the real
+    Round 3 completion. The terminal rejects submissions until every shelf card has
+    been inspected.
 
 ## Decoys
 
 - The in-page ads link to `/rickroll/`, which redirects to the Rick Astley video.
 - `/human-check/` is a fake icon-click verification and sends players to the same rickroll.
 - Broken menu items have no target or lead to `/dead-end/`.
+
+## ffuf/Hydra extension (local lab only)
+
+1. The primary Evidence 03 path is `mirror-cache-9w`, an unlinked endpoint in
+   `wordlists/ffuf_directories.txt`. It returns the CyberLeek evidence flag and
+   transition message directly. `/robots.txt` contains only decoy locations.
+2. The extended portal path remains available for a longer local lab. It contains
+   four unlinked portal routes; `/flag` and `/congratulations` return deliberate
+   bait flags.
+3. Each portal accepts `dev_admin`, but the staging, legacy, and backup portals
+   return decoy flags. The real portal is `/internal-portal-x92`.
+4. Inspect the real portal source for `/static/app.js`, then inspect the comment
+   in that local script. It points to `/static/debug.log`.
+5. Decode the three base64 payloads. The first two yield the staging and legacy
+   passwords. Reverse the third decoded value, `4QB!KCB#g7Ty`, to get the real
+   password: `yT7g#BCK!BQ4`.
+6. Submit `dev_admin` and that password only at `/internal-portal-x92`. The
+   recovered mirror index points to the hidden, session-gated endpoint
+   `/evidence/surface-9w`.
+7. Visit that endpoint to recover `CYBERLEEK{Surf\@ce\_9#W}` and the Round 3
+   transition: "You found the surface. The timeline is where the story begins to
+   make sense."
+
+The portal throttle allows three failed attempts per portal and client IP, then
+locks that portal for 480 seconds. This is intentionally simulated in Flask and
+is for the local training server only.

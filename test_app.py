@@ -5,7 +5,12 @@ from app import ARCHIVE_CODE, FINAL_CODE, FINAL_KEY, app
 
 class AdroitGameTests(unittest.TestCase):
     def setUp(self):
-        app.config.update(TESTING=True, SECRET_KEY="test-key")
+        app.config.update(
+            TESTING=True,
+            SECRET_KEY="test-key",
+            PORTAL_ATTEMPTS={},
+            PORTAL_LOCKOUTS={},
+        )
         self.client = app.test_client()
 
     def collect_all_fragments(self):
@@ -111,12 +116,13 @@ class AdroitGameTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b"CODEBOOK LOCKED", response.data)
 
-    def test_final_terminal_awards_the_flag_after_full_investigation(self):
+    def test_archive_completion_serves_the_adroit_decoy_flag(self):
         self.unlock_relay()
         self.inspect_all_codebook_shelves()
         response = self.client.post("/term-inal/final", data={"key": FINAL_KEY}, follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"ADROIT{old_web_never_forgets}", response.data)
+        self.assertIn(b"ADROIT{old\\_web\\_never\\_forgets}", response.data)
+        self.assertNotIn(b"CYBERLEEK{Surf\\@ce\\_9#W}", response.data)
 
     def test_unknown_old_file_is_still_not_found(self):
         response = self.client.get("/old-files/answer.txt")
@@ -126,6 +132,72 @@ class AdroitGameTests(unittest.TestCase):
         response = self.client.get("/term-inal/success")
         self.assertEqual(response.status_code, 302)
         self.assertIn(b"/term-inal/", response.data)
+
+    def test_enumeration_portals_and_bait_are_available(self):
+        real_portal = self.client.get("/internal-portal-x92")
+        decoy_portal = self.client.get("/staging-portal-y44")
+        bait = self.client.get("/flag")
+
+        self.assertEqual(real_portal.status_code, 200)
+        self.assertIn(b"/static/app.js", real_portal.data)
+        self.assertEqual(decoy_portal.status_code, 200)
+        self.assertNotIn(b"/static/app.js", decoy_portal.data)
+        self.assertEqual(bait.status_code, 200)
+        self.assertIn(b"CTF{", bait.data)
+
+    def test_mirror_cache_endpoint_is_unlinked_but_discoverable_without_a_session(self):
+        robots = self.client.get("/robots.txt")
+        evidence = self.client.get("/mirror-cache-9w")
+
+        self.assertEqual(robots.status_code, 200)
+        self.assertIn(b"Disallow: /admin", robots.data)
+        self.assertNotIn(b"mirror-cache-9w", robots.data)
+        self.assertEqual(evidence.status_code, 200)
+        self.assertIn(b"CYBERLEEK{Surf\\@ce\\_9#W}", evidence.data)
+        self.assertIn(b"You found the surface.", evidence.data)
+
+    def test_each_portal_has_its_own_login_and_decoy_flag(self):
+        response = self.client.post(
+            "/staging-portal-y44",
+            data={"username": "dev_admin", "password": "Staging123!"},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"CTF{av0dkfjwplqz", response.data)
+
+    def test_real_portal_throttles_wrong_attempts_before_accepting_a_login(self):
+        for _ in range(3):
+            response = self.client.post(
+                "/internal-portal-x92",
+                data={"username": "dev_admin", "password": "wrong"},
+            )
+            self.assertIn(b"Invalid credentials", response.data)
+
+        locked = self.client.post(
+            "/internal-portal-x92",
+            data={"username": "dev_admin", "password": "yT7g#BCK!BQ4"},
+        )
+
+        self.assertEqual(locked.status_code, 429)
+        self.assertIn(b"LOCKED", locked.data)
+
+    def test_hidden_mirror_evidence_requires_real_portal_access(self):
+        denied = self.client.get("/evidence/surface-9w")
+        self.assertEqual(denied.status_code, 404)
+
+        response = self.client.post(
+            "/internal-portal-x92",
+            data={"username": "dev_admin", "password": "yT7g#BCK!BQ4"},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b"MIRROR INDEX RECOVERED", response.data)
+        self.assertNotIn(b"CYBERLEEK{Surf\\@ce\\_9#W}", response.data)
+
+        evidence = self.client.get("/evidence/surface-9w")
+        self.assertEqual(evidence.status_code, 200)
+        self.assertIn(b"CYBERLEEK{Surf\\@ce\\_9#W}", evidence.data)
+        self.assertIn(b"You found the surface.", evidence.data)
 
 
 if __name__ == "__main__":

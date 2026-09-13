@@ -1,9 +1,44 @@
 import os
+import time
 
 from flask import Flask, abort, redirect, render_template, request, session, url_for
 
 
-FINAL_FLAG = "ADROIT{old_web_never_forgets}"
+ARCHIVE_DECOY_FLAG = "ADROIT{old\\_web\\_never\\_forgets}"
+MIRROR_EVIDENCE_FLAG = "CYBERLEEK{Surf\\@ce\\_9#W}"
+HIDDEN_MIRROR_ENDPOINT = "mirror-cache-9w"
+MAX_LOGIN_ATTEMPTS = 3
+LOCKOUT_SECONDS = 480
+PORTALS = {
+    "internal-portal-x92": {
+        "title": "Internal Logistics Portal",
+        "username": "dev_admin",
+        "password": "yT7g#BCK!BQ4",
+        "is_real": True,
+    },
+    "staging-portal-y44": {
+        "title": "Staging Logistics Portal",
+        "username": "dev_admin",
+        "password": "Staging123!",
+        "flag": "CTF{av0dkfjwplqz_staging.ctf}",
+        "is_real": False,
+    },
+    "legacy-admin-q17": {
+        "title": "Legacy Administration Portal",
+        "username": "dev_admin",
+        "password": "Legacy2020!",
+        "flag": "CTF{mzxcvbnqwerty_legacy.ctf}",
+        "is_real": False,
+    },
+    "backup-access-z8": {
+        "title": "Backup Access Portal",
+        "username": "dev_admin",
+        "password": "Backup!8Z",
+        "flag": "CTF{qplsxrjhtdyfu_backup.ctf}",
+        "is_real": False,
+    },
+}
+BAIT_FLAG = "CTF{nyfwexkqzblm_lazy_guess.ctf}"
 FINAL_KEY = "ADROITMOUSETRAIL"
 FRAGMENT_PATHS = (
     "/archives/counter",
@@ -80,11 +115,85 @@ FINAL_CODE = relay_code()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "adroit-local-training-key")
+app.config.setdefault("PORTAL_ATTEMPTS", {})
+app.config.setdefault("PORTAL_LOCKOUTS", {})
 
 
 @app.route("/")
 def home():
     return render_template("home.html")
+
+
+@app.route("/flag")
+@app.route("/congratulations")
+def enumeration_bait():
+    return render_template("bait.html", flag=BAIT_FLAG)
+
+
+@app.get("/robots.txt")
+def robots():
+    return "User-agent: *\nDisallow: /admin\nDisallow: /old\nDisallow: /backup\n", 200, {
+        "Content-Type": "text/plain"
+    }
+
+
+@app.get(f"/{HIDDEN_MIRROR_ENDPOINT}")
+def recovered_mirror():
+    return render_template("evidence.html", flag=MIRROR_EVIDENCE_FLAG)
+
+
+@app.route("/evidence/surface-9w")
+def mirror_evidence():
+    if not session.get("mirror_access"):
+        abort(404)
+    return render_template("evidence.html", flag=MIRROR_EVIDENCE_FLAG)
+
+
+@app.route("/<portal>", methods=["GET", "POST"])
+def enumeration_portal(portal):
+    portal_data = PORTALS.get(portal)
+    if portal_data is None:
+        abort(404)
+
+    key = (portal, request.remote_addr or "local")
+    attempts = app.config["PORTAL_ATTEMPTS"]
+    lockouts = app.config["PORTAL_LOCKOUTS"]
+    now = time.monotonic()
+    locked_until = lockouts.get(key)
+    if locked_until and locked_until > now:
+        remaining_seconds = int(locked_until - now) + 1
+        return (
+            render_template(
+                "portal.html",
+                portal=portal_data,
+                error=(
+                    "LOCKED: too many failed attempts. "
+                    f"Try again in {remaining_seconds} seconds."
+                ),
+            ),
+            429,
+        )
+    if locked_until:
+        lockouts.pop(key, None)
+        attempts.pop(key, None)
+
+    error = None
+    if request.method == "POST":
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+        if username == portal_data["username"] and password == portal_data["password"]:
+            attempts.pop(key, None)
+            if portal_data["is_real"]:
+                session["mirror_access"] = True
+                return render_template("portal.html", portal=portal_data, mirror_unlocked=True)
+            return render_template("portal.html", portal=portal_data, flag=portal_data["flag"])
+
+        attempts[key] = attempts.get(key, 0) + 1
+        if attempts[key] >= MAX_LOGIN_ATTEMPTS:
+            lockouts[key] = now + LOCKOUT_SECONDS
+            attempts.pop(key, None)
+        error = "Invalid credentials."
+    return render_template("portal.html", portal=portal_data, error=error)
 
 
 @app.route("/archives/")
@@ -195,7 +304,7 @@ def relay_terminal():
 def complete():
     if not session.get("final_solved"):
         return redirect(url_for("terminal"))
-    return render_template("success.html", flag=FINAL_FLAG)
+    return render_template("success.html", flag=ARCHIVE_DECOY_FLAG)
 
 
 @app.route("/archives/codebook/")
