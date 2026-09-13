@@ -65,14 +65,15 @@ Do not link this file from the application.
 - `/human-check/` is a fake icon-click verification and sends players to the same rickroll.
 - Broken menu items have no target or lead to `/dead-end/`.
 
-## ffuf/Hydra extension (local lab only)
+## Integrated mirror-operations trail
 
-1. The primary Evidence 03 path is `mirror-cache-9w`, an unlinked endpoint in
-   `wordlists/ffuf_directories.txt`. It returns the CyberLeek evidence flag and
-   transition message directly. `/robots.txt` contains only decoy locations.
-2. The extended portal path remains available for a longer local lab. It contains
-   four unlinked portal routes; `/flag` and `/congratulations` return deliberate
-   bait flags.
+1. The primary Evidence 03 path starts at `mirror-index-3`, an unlinked endpoint
+   in `wordlists/ffuf_directories.txt`. It presents `cache-`, `9w`, and `mirror-`
+   out of order. The archive convention (source, cache, record) reconstructs
+   `mirror-cache-9w`, which returns the CyberLeek evidence flag and transition
+   message. `/robots.txt` contains only decoy locations.
+2. The four portal routes are CyberLeek's operator records on the same AdroIT
+   mirror network. `/flag` and `/congratulations` return deliberate bait flags.
 3. Each portal accepts `dev_admin`, but the staging, legacy, and backup portals
    return decoy flags. The real portal is `/internal-portal-x92`.
 4. Inspect the real portal source for `/static/app.js`, then inspect the comment

@@ -145,16 +145,32 @@ class AdroitGameTests(unittest.TestCase):
         self.assertEqual(bait.status_code, 200)
         self.assertIn(b"CTF{", bait.data)
 
-    def test_mirror_cache_endpoint_is_unlinked_but_discoverable_without_a_session(self):
+    def test_mirror_index_jumbles_the_final_endpoint_before_evidence_is_recovered(self):
         robots = self.client.get("/robots.txt")
+        index = self.client.get("/mirror-index-3")
         evidence = self.client.get("/mirror-cache-9w")
 
         self.assertEqual(robots.status_code, 200)
         self.assertIn(b"Disallow: /admin", robots.data)
         self.assertNotIn(b"mirror-cache-9w", robots.data)
+        self.assertEqual(index.status_code, 200)
+        self.assertIn(b"cache-", index.data)
+        self.assertIn(b"mirror-", index.data)
+        self.assertIn(b"9w", index.data)
+        self.assertNotIn(b'href="/mirror-cache-9w"', index.data)
         self.assertEqual(evidence.status_code, 200)
         self.assertIn(b"CYBERLEEK{Surf\\@ce\\_9#W}", evidence.data)
         self.assertIn(b"You found the surface.", evidence.data)
+
+    def test_archive_shell_and_operator_portals_are_linked_to_the_cyberleek_plot(self):
+        index = self.client.get("/mirror-index-3")
+        portal = self.client.get("/internal-portal-x92")
+        evidence = self.client.get("/mirror-cache-9w")
+
+        self.assertIn(b"CYBERLEEK TRANSFER INDEX", index.data)
+        self.assertIn(b"ADROIT MIRROR SHELL", index.data)
+        self.assertIn(b"CYBERLEEK MIRROR OPERATIONS", portal.data)
+        self.assertIn(b"legacy AdroIT archive", evidence.data)
 
     def test_each_portal_has_its_own_login_and_decoy_flag(self):
         response = self.client.post(

@@ -7,6 +7,7 @@ from flask import Flask, abort, redirect, render_template, request, session, url
 ARCHIVE_DECOY_FLAG = "ADROIT{old\\_web\\_never\\_forgets}"
 MIRROR_EVIDENCE_FLAG = "CYBERLEEK{Surf\\@ce\\_9#W}"
 HIDDEN_MIRROR_ENDPOINT = "mirror-cache-9w"
+MIRROR_INDEX_ENDPOINT = "mirror-index-3"
 MAX_LOGIN_ATTEMPTS = 3
 LOCKOUT_SECONDS = 480
 PORTALS = {
@@ -140,6 +141,11 @@ def robots():
 @app.get(f"/{HIDDEN_MIRROR_ENDPOINT}")
 def recovered_mirror():
     return render_template("evidence.html", flag=MIRROR_EVIDENCE_FLAG)
+
+
+@app.get(f"/{MIRROR_INDEX_ENDPOINT}")
+def mirror_index():
+    return render_template("mirror_index.html")
 
 
 @app.route("/evidence/surface-9w")

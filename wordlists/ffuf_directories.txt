@@ -9,7 +9,7 @@ images
 internal-portal-x92
 legacy-admin-q17
 login
-mirror-cache-9w
+mirror-index-3
 portal
 staging-portal-y44
 status

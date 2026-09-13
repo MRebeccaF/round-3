@@ -3,16 +3,17 @@
 {% block content %}
 {% if portal.is_real %}<script src="{{ url_for('static', filename='app.js') }}"></script>{% endif %}
 <section class="terminal">
+  <p>CYBERLEEK MIRROR OPERATIONS // TRANSFER NETWORK</p>
   <h1>{{ portal.title }}</h1>
   {% if mirror_unlocked %}
   <!-- recovered surface endpoint: /evidence/surface-9w -->
   <p>MIRROR INDEX RECOVERED</p>
-  <p>The public copy was removed. The surviving surface record is still indexed.</p>
+  <p>The public copy was removed. The surviving surface record connects this operator system to the AdroIT mirror shell.</p>
   {% elif flag %}
   <p>ACCESS GRANTED</p>
   <p class="flag">{{ flag }}</p>
   {% else %}
-  <p>Authorized staff only. This simulated CTF login is local to the training app.</p>
+  <p>Authorized mirror operators only. This terminal belongs to the CyberLeek redistribution network.</p>
   <form method="post">
     <label for="username">USERNAME&gt;</label>
     <input id="username" name="username" required autofocus>

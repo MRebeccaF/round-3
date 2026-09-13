@@ -38,25 +38,28 @@ python -m unittest -v
 
 `SOLUTION.md` is for instructors only. Do not serve or link it from the application.
 
-## ffuf/Hydra training extension
+## Round 3 mirror-operations trail
 
-The app now includes a separate, entirely local enumeration lab. Its four unlinked
-top-level portal routes are listed in `wordlists/ffuf_directories.txt`; three are
-convincing decoys and only `internal-portal-x92` is the real route. `/flag` and
-`/congratulations` are intentionally misleading bait routes.
+The abandoned AdroIT archive is the shell of the CyberLeek mirror network. Its
+four unlinked operator portals are listed in `wordlists/ffuf_directories.txt`;
+three are convincing decoy copies and only `internal-portal-x92` is the real
+operator record. `/flag` and `/congratulations` are intentionally misleading bait
+from the same redistribution trail.
 
 The real portal references `/static/app.js`, whose maintenance note leads to a
 local debug log. Each portal has an independent, IP-scoped lockout after three
 failed login attempts. The lockout is 480 seconds—twice the 240-second reference
 setting—so this remains a controlled local CTF exercise rather than a real login
-attack. `wordlists/hydra_passwords.txt` is provided for the lab only.
+attack. `wordlists/hydra_passwords.txt` is part of the mirror-operations evidence
+trail.
 
 Round 3 is presented in-site as **Evidence 03 — The Mirror Web Enumeration**.
-The source challenge's core route is also present: `mirror-cache-9w` is unlinked,
-listed in the provided ffuf wordlist, and returns the CyberLeek evidence directly.
-`/robots.txt` contains only conventional decoy disallows. The original portal path
-still leads to its session-gated evidence endpoint, so no existing archive routes
-or puzzle stages change.
+The source challenge's core route now begins at `mirror-index-3`, which is unlinked
+and listed in the provided ffuf wordlist. Its recovered index presents the final
+address fragments out of order; players reconstruct and enter the evidence route
+themselves. `/robots.txt` contains only conventional decoy disallows. The original
+portal path still leads to its session-gated evidence endpoint, so no existing
+archive routes or puzzle stages change.
 
 For the direct mirror exercise, enumerate only the local server:
 
